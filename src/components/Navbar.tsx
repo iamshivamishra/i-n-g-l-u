@@ -60,6 +60,12 @@ export default function Navbar() {
               <span className="hidden sm:inline text-sm font-semibold text-slate-700">
                 Hi, {user?.name?.split(' ')[0]}
               </span>
+              <Link
+                href="/dashboard"
+                className="hidden sm:inline text-sm font-semibold text-slate-700 hover:text-inglu-blue transition-colors"
+              >
+                Dashboard
+              </Link>
               <button
                 onClick={handleLogout}
                 className="bg-inglu-blue text-white text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-1.5 hover:bg-inglu-blue-dark transition-colors cursor-pointer"

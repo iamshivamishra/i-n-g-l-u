@@ -22,10 +22,12 @@ export default function UpcomingEvents() {
         {/* Responsive Grid Layout */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {events.map((event) => {
-            // Data mapping standard rakhne ke liye default dummy fallback values agar data me dynamic month na ho
-            const displayDay = event.day || "25";
-            const displayMonth = event.month || "JUN";
-            const progressPercent = event.progress || 40; // Aap progress dynamic rakh sakte ho backend/data se
+            // events data has a combined "date" field like "25 JUN" — split
+            // it into day + month for the two-line date box below.
+            const [displayDay, displayMonth] = event.date
+              ? event.date.split(" ")
+              : ["25", "JUN"];
+            const progressPercent = 40; // Aap progress dynamic rakh sakte ho backend/data se
 
             return (
               <div

@@ -79,7 +79,7 @@ function LoginForm() {
       if (redirect) {
         router.replace(redirect);
       } else {
-        router.replace("/");
+        router.replace("/dashboard");
       }
     } catch (err) {
       console.error(err);
@@ -100,111 +100,103 @@ function LoginForm() {
   }
 
   return (
-    <div className="relative mx-4 my-8 flex min-h-[80vh] w-auto items-center justify-center">
-      <div className="flex w-full max-w-md flex-col items-center gap-6 rounded-3xl border border-black/25 bg-[#F4F7FE] p-6 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] sm:mx-auto sm:max-w-lg lg:max-w-5xl lg:flex-row lg:items-center lg:gap-12 lg:p-12">
-        
-        {/* Left Side: Logo (Fixed sizing issue here) */}
-        <div className="hidden w-1/2 items-center justify-center p-4 lg:flex">
-          <Image
-            src={INGLUGlobalLogo}
-            alt="INGLU Global Logo"
-            className="h-auto w-full max-w-sm object-contain"
-            priority
-          />
+    <div className="relative mx-4 mt-4 mb-6 flex w-auto max-w-md flex-col items-center gap-6 rounded-3xl border border-black/25 bg-[#F4F7FE] p-6 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] sm:mx-auto sm:max-w-lg lg:max-w-6xl lg:flex-row lg:gap-6 lg:p-16">
+      <Image
+        src={INGLUGlobalLogo}
+        alt="INGLU Global Logo"
+        className="hidden max-w-1/2 flex-1 lg:block"
+      />
+
+      <div className="flex w-full flex-1 flex-col items-center gap-4">
+        <div className="mb-4 flex flex-col items-center text-center">
+          <span className="text-2xl font-semibold sm:text-3xl lg:text-4xl">
+            Welcome Back !
+          </span>
+          <span className="text-xs font-light sm:text-sm">
+            Please enter your details
+          </span>
         </div>
 
-        {/* Right Side: Form */}
-        <div className="flex w-full flex-1 flex-col items-center gap-4">
-          <div className="mb-2 flex flex-col items-center text-center">
-            <span className="text-2xl font-semibold sm:text-3xl lg:text-4xl">
-              Welcome Back !
-            </span>
-            <span className="text-xs font-light sm:text-sm">
-              Please enter your details
-            </span>
-          </div>
+        <label className="flex w-full max-w-md flex-col gap-1">
+          <span className="ml-4 text-[15px] font-medium">Email</span>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Enter your email"
+            className={`w-full rounded-xl border bg-white px-5 py-3 text-[15px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] outline-none ${
+              errors.email ? "border-red-500" : "border-[#6B99FF]"
+            }`}
+          />
+          {errors.email && (
+            <span className="ml-4 text-xs text-red-500">{errors.email}</span>
+          )}
+        </label>
 
-          <label className="flex w-full max-w-md flex-col gap-1">
-            <span className="ml-4 text-[15px] font-medium">Email</span>
+        <div className="flex w-full max-w-md flex-col gap-1">
+          <span className="ml-4 text-[15px] font-medium">Password</span>
+
+          <div
+            className={`flex w-full items-center gap-4 overflow-hidden rounded-xl border bg-white pr-5 shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] ${
+              errors.password ? "border-red-500" : "border-[#6B99FF]"
+            }`}
+          >
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={formData.password}
               onChange={handleChange}
-              placeholder="Enter your email"
-              className={`w-full rounded-xl border bg-white px-5 py-3 text-[15px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] outline-none ${
-                errors.email ? "border-red-500" : "border-[#6B99FF]"
-              }`}
+              placeholder="Enter your password"
+              className="w-full py-3 pl-5 text-[15px] outline-none"
             />
-            {errors.email && (
-              <span className="ml-4 text-xs text-red-500">{errors.email}</span>
-            )}
-          </label>
-
-          <div className="flex w-full max-w-md flex-col gap-1">
-            <span className="ml-4 text-[15px] font-medium">Password</span>
-
-            <div
-              className={`flex w-full items-center gap-4 overflow-hidden rounded-xl border bg-white pr-5 shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] ${
-                errors.password ? "border-red-500" : "border-[#6B99FF]"
-              }`}
-            >
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                className="w-full py-3 pl-5 text-[15px] outline-none"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="cursor-pointer hover:opacity-75 active:opacity-50"
-              >
-                {showPassword ? <Eye size={22} /> : <EyeOff size={22} />}
-              </button>
-            </div>
-            {errors.password && (
-              <span className="ml-4 text-xs text-red-600">{errors.password}</span>
-            )}
-
-            <Link
-              href="/forgot-password"
-              className="ml-auto p-2 text-xs font-medium text-[#0425F9] hover:opacity-75 active:opacity-50"
-            >
-              Forgot Password?
-            </Link>
-
             <button
               type="button"
-              onClick={handleSubmit}
-              className="cursor-pointer rounded-xl bg-gradient-to-r from-[#155DFC] to-[#5087FF] px-4 py-2.5 text-base text-white shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-none sm:text-lg lg:text-xl"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="cursor-pointer hover:opacity-75 active:opacity-50"
             >
-              Log In
+              {showPassword ? <Eye size={22} /> : <EyeOff size={22} />}
             </button>
           </div>
+          {errors.password && (
+            <span className="ml-4 text-xs text-red-600">{errors.password}</span>
+          )}
 
-          <span className="text-sm text-[#676767]">Or</span>
+          <Link
+            href="/forgot-password"
+            className="ml-auto p-2 text-xs font-medium text-[#0425F9] hover:opacity-75 active:opacity-50"
+          >
+            Forgot Password?
+          </Link>
 
           <button
             type="button"
-            onClick={handleGoogleLogin}
-            className="flex w-full max-w-md cursor-pointer items-center justify-center gap-4 rounded-xl border border-[#6B99FF] bg-white px-5 py-3 shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-none"
+            onClick={handleSubmit}
+            className="cursor-pointer rounded-xl bg-gradient-to-r from-[#155DFC] to-[#5087FF] px-4 py-2.5 text-base text-white shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-none sm:text-lg lg:text-xl"
           >
-            <Image src={GoogleGLogo} alt="Google Logo" className="size-6" />
-            <span>Sign in with Google</span>
+            Log In
           </button>
+        </div>
 
-          <div className="flex gap-2 text-sm">
-            <span className="font-light">Don&apos;t have an account?</span>
-            <Link
-              href="/signup"
-              className="font-medium text-[#1A6BF7] hover:opacity-75 active:opacity-50"
-            >
-              Sign Up
-            </Link>
-          </div>
+        <span className="text-sm text-[#676767]">Or</span>
+
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="flex w-full max-w-md cursor-pointer items-center justify-center gap-4 rounded-xl border border-[#6B99FF] bg-white px-5 py-3 shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-none"
+        >
+          <Image src={GoogleGLogo} alt="Google Logo" className="size-6" />
+          <span>Sign in with Google</span>
+        </button>
+
+        <div className="flex gap-2 text-sm">
+          <span className="font-light">Don&apos;t have an account?</span>
+          <Link
+            href="/signup"
+            className="font-medium text-[#1A6BF7] hover:opacity-75 active:opacity-50"
+          >
+            Sign Up
+          </Link>
         </div>
       </div>
     </div>

@@ -33,7 +33,12 @@ export default function WhoAreYou() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {personas.map((p, i) => {
             // Match custom styling based on persona tag/title
-            const style = cardStyles[p.title.toUpperCase()] || { bg: 'bg-slate-50', text: 'text-slate-900', btn: 'bg-slate-800' }
+            const style =
+              cardStyles[p.title.toUpperCase() as keyof typeof cardStyles] || {
+                bg: 'bg-slate-50',
+                text: 'text-slate-900',
+                btn: 'bg-slate-800',
+              }
             
             return (
               <div
