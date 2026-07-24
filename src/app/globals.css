@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0d1330;
+  -webkit-font-smoothing: antialiased;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---- Hero motion ---- */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-float-a {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(3deg); }
+}
+@keyframes hero-float-b {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(14px) rotate(-3deg); }
+}
+@keyframes hero-float-phone {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-hero-fade-up {
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-hero-float-a {
+  animation: hero-float-a 4.5s ease-in-out infinite;
+}
+.animate-hero-float-b {
+  animation: hero-float-b 5.5s ease-in-out infinite;
+}
+.animate-hero-float-phone {
+  animation: hero-float-phone 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-fade-up,
+  .animate-hero-float-a,
+  .animate-hero-float-b,
+  .animate-hero-float-phone {
+    animation: none;
+  }
+}
