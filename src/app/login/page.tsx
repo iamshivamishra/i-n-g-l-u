@@ -2,7 +2,7 @@
 
 import INGLUGlobalLogo from "@/assets/INGLU Global Logo.png";
 import GoogleGLogo from "@/assets/Google_G_logo.svg";
-import { AlertTriangle, Eye, EyeOff, CircleCheck } from "lucide-react";
+import { AlertTriangle, Eye, EyeOff, CircleCheck, Loader2 } from "lucide-react";
 import { Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,6 +24,7 @@ function LoginForm() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,7 +45,9 @@ function LoginForm() {
     }));
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
     const result = validateLoginForm(formData);
     if (!result.isValid) {
       setErrors({
@@ -53,6 +56,9 @@ function LoginForm() {
       });
       return;
     }
+
+    setIsSubmitting(true);
+
     try {
       const res = await login(formData);
       if (res?.error) {
@@ -70,7 +76,7 @@ function LoginForm() {
       toast(
         <span className="flex items-center gap-2">
           <CircleCheck size={18} />
-          Successfully Login
+          Successfully Logged In
         </span>,
         "success",
         2000,
@@ -83,6 +89,8 @@ function LoginForm() {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -100,100 +108,131 @@ function LoginForm() {
   }
 
   return (
-    <div className="relative mx-4 mt-4 mb-6 flex w-auto max-w-md flex-col items-center gap-6 rounded-3xl border border-black/25 bg-[#F4F7FE] p-6 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] sm:mx-auto sm:max-w-lg lg:max-w-6xl lg:flex-row lg:gap-6 lg:p-16">
-      <Image
-        src={INGLUGlobalLogo}
-        alt="INGLU Global Logo"
-        className="hidden max-w-1/2 flex-1 lg:block"
-      />
+    <div className="mx-auto my-6 flex w-full max-w-sm flex-col items-center gap-8 rounded-3xl border border-black/20 bg-[#F4F7FE] p-6 shadow-md sm:max-w-md md:max-w-lg lg:max-w-5xl lg:flex-row lg:p-12">
+      {/* Left Image Section */}
+      <div className="hidden items-center justify-center lg:flex lg:w-1/2">
+        <Image
+          src={INGLUGlobalLogo}
+          alt="INGLU Global Logo"
+          className="h-auto max-w-full object-contain"
+          priority
+        />
+      </div>
 
-      <div className="flex w-full flex-1 flex-col items-center gap-4">
-        <div className="mb-4 flex flex-col items-center text-center">
-          <span className="text-2xl font-semibold sm:text-3xl lg:text-4xl">
-            Welcome Back !
-          </span>
-          <span className="text-xs font-light sm:text-sm">
+      {/* Right Form Section */}
+      <div className="flex w-full flex-col items-center justify-center lg:w-1/2">
+        <div className="mb-6 flex flex-col items-center text-center">
+          <h1 className="text-2xl font-semibold sm:text-3xl lg:text-4xl">
+            Welcome Back!
+          </h1>
+          <p className="mt-1 text-xs text-gray-600 sm:text-sm">
             Please enter your details
-          </span>
+          </p>
         </div>
 
-        <label className="flex w-full max-w-md flex-col gap-1">
-          <span className="ml-4 text-[15px] font-medium">Email</span>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            className={`w-full rounded-xl border bg-white px-5 py-3 text-[15px] shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] outline-none ${
-              errors.email ? "border-red-500" : "border-[#6B99FF]"
-            }`}
-          />
-          {errors.email && (
-            <span className="ml-4 text-xs text-red-500">{errors.email}</span>
-          )}
-        </label>
-
-        <div className="flex w-full max-w-md flex-col gap-1">
-          <span className="ml-4 text-[15px] font-medium">Password</span>
-
-          <div
-            className={`flex w-full items-center gap-4 overflow-hidden rounded-xl border bg-white pr-5 shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] ${
-              errors.password ? "border-red-500" : "border-[#6B99FF]"
-            }`}
-          >
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
+          {/* Email Input */}
+          <div className="flex w-full flex-col gap-1">
+            <label htmlFor="email" className="ml-2 text-sm font-medium text-gray-700">
+              Email
+            </label>
             <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={formData.password}
+              id="email"
+              type="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your password"
-              className="w-full py-3 pl-5 text-[15px] outline-none"
+              placeholder="Enter your email"
+              className={`w-full rounded-xl border bg-white px-4 py-3 text-sm shadow-sm outline-none transition duration-150 focus:ring-2 ${
+                errors.email
+                  ? "border-red-500 focus:ring-red-200"
+                  : "border-[#6B99FF] focus:ring-blue-200"
+              }`}
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="cursor-pointer hover:opacity-75 active:opacity-50"
-            >
-              {showPassword ? <Eye size={22} /> : <EyeOff size={22} />}
-            </button>
+            {errors.email && (
+              <span className="ml-2 text-xs text-red-500">{errors.email}</span>
+            )}
           </div>
-          {errors.password && (
-            <span className="ml-4 text-xs text-red-600">{errors.password}</span>
-          )}
 
-          <Link
-            href="/forgot-password"
-            className="ml-auto p-2 text-xs font-medium text-[#0425F9] hover:opacity-75 active:opacity-50"
-          >
-            Forgot Password?
-          </Link>
+          {/* Password Input */}
+          <div className="flex w-full flex-col gap-1">
+            <label htmlFor="password" className="ml-2 text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <div
+              className={`flex w-full items-center rounded-xl border bg-white px-4 shadow-sm transition duration-150 focus-within:ring-2 ${
+                errors.password
+                  ? "border-red-500 focus-within:ring-red-200"
+                  : "border-[#6B99FF] focus-within:ring-blue-200"
+              }`}
+            >
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                className="w-full py-3 text-sm outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+              </button>
+            </div>
+            {errors.password && (
+              <span className="ml-2 text-xs text-red-500">{errors.password}</span>
+            )}
 
+            <Link
+              href="/forgot-password"
+              className="ml-auto text-xs font-medium text-[#0425F9] hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+
+          {/* Login Button */}
           <button
-            type="button"
-            onClick={handleSubmit}
-            className="cursor-pointer rounded-xl bg-gradient-to-r from-[#155DFC] to-[#5087FF] px-4 py-2.5 text-base text-white shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-none sm:text-lg lg:text-xl"
+            type="submit"
+            disabled={isSubmitting}
+            className="mt-2 flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#155DFC] to-[#5087FF] py-3 text-base font-medium text-white shadow-md hover:opacity-95 active:translate-y-0.5 active:shadow-none disabled:opacity-50"
           >
-            Log In
+            {isSubmitting ? (
+              <Loader2 className="animate-spin" size={20} />
+            ) : (
+              "Log In"
+            )}
           </button>
+        </form>
+
+        {/* Divider */}
+        <div className="my-4 flex items-center justify-center text-sm text-gray-500">
+          <span>Or</span>
         </div>
 
-        <span className="text-sm text-[#676767]">Or</span>
-
+        {/* Google Sign-in */}
         <button
           type="button"
           onClick={handleGoogleLogin}
-          className="flex w-full max-w-md cursor-pointer items-center justify-center gap-4 rounded-xl border border-[#6B99FF] bg-white px-5 py-3 shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-none"
+          className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#6B99FF] bg-white py-3 shadow-sm transition hover:bg-gray-50 active:translate-y-0.5"
         >
-          <Image src={GoogleGLogo} alt="Google Logo" className="size-6" />
-          <span>Sign in with Google</span>
+          <Image src={GoogleGLogo} alt="Google Logo" className="h-5 w-5" />
+          <span className="text-sm font-medium text-gray-700">
+            Sign in with Google
+          </span>
         </button>
 
-        <div className="flex gap-2 text-sm">
-          <span className="font-light">Don&apos;t have an account?</span>
+        {/* Sign Up Link */}
+        <div className="mt-6 flex items-center gap-1 text-sm">
+          <span className="font-light text-gray-600">Don&apos;t have an account?</span>
           <Link
             href="/signup"
-            className="font-medium text-[#1A6BF7] hover:opacity-75 active:opacity-50"
+            className="font-semibold text-[#1A6BF7] hover:underline"
           >
             Sign Up
           </Link>
