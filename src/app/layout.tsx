@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import PageTransition from '@/components/Pagetransition'
 import { AuthProvider } from '@/context/AuthContext'
 import ToastContainer from '@/components/Toast'
 import './globals.css'
@@ -43,7 +44,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white font-sans antialiased">
         <AuthProvider>
           <Navbar />
-          {children}
+          <PageTransition>{children}</PageTransition>
           <Footer />
           <ToastContainer />
         </AuthProvider>

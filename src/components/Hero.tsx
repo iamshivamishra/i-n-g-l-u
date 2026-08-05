@@ -65,9 +65,9 @@ export default function Hero() {
           className="absolute inset-0 rounded-3xl overflow-hidden border border-white/40"
           style={{
             background:
-              'radial-gradient(ellipse 78% 55% at 50% -8%, rgba(255,255,255,0.26) 0%, transparent 55%), ' +
-              'radial-gradient(ellipse 55% 60% at 86% 112%, rgba(8,22,110,0.45) 0%, transparent 60%), ' +
-              'linear-gradient(165deg, #3a6bff 0%, #2350ec 52%, #1a3fce 100%)',
+              'radial-gradient(ellipse 78% 55% at 50% -8%, rgba(255,255,255,0.16) 0%, transparent 55%), ' +
+              'radial-gradient(ellipse 55% 60% at 86% 112%, rgba(3,10,60,0.65) 0%, transparent 60%), ' +
+              'linear-gradient(165deg, #1b3aa8 0%, #0f2570 52%, #081450 100%)',
             boxShadow: '0 60px 120px -38px rgba(26,55,160,0.55), 0 20px 44px -22px rgba(26,55,160,0.4)',
           }}
         >
