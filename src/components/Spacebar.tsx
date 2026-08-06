@@ -1,163 +1,160 @@
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { SPACEBAR_STATS, SPACEBAR_LIVING_ROOM_CARDS, SPACEBAR_MOMENTS_CARDS } from '@/data/data'
+// app/spacebar/page.tsx
+export const metadata = {
+  title: "SPACEBAR — INGLU Website UI",
+  description:
+    "Spacebar is the room between ideas and action, where late-night thoughts become projects, startups, bands, festivals and friendships.",
+};
 
-function Stat({ value, label }: { value: string; label: string }) {
+export default function SpacebarPage() {
   return (
-    <div className="text-center">
-      <strong className="block text-lg sm:text-xl font-extrabold text-white leading-tight">{value}</strong>
-      <span className="text-xs sm:text-sm text-blue-50/80 font-medium">{label}</span>
-    </div>
-  )
-}
-
-function Card({ title, body }: { title: string; body: string }) {
-  return (
-    <article className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6">
-      <h3 className="text-lg font-bold text-inglu-ink mb-2">{title}</h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{body}</p>
-    </article>
-  )
-}
-
-function SectionHead({
-  kicker,
-  heading,
-  lead,
-}: {
-  kicker: string
-  heading: string
-  lead?: string
-}) {
-  return (
-    <div className="max-w-3xl mx-auto text-center mb-12">
-      <p className="inline-block text-xs font-semibold tracking-wide text-inglu-blue bg-inglu-blue/10 px-3 py-1.5 rounded-full mb-4">
-        {kicker}
-      </p>
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-inglu-ink leading-tight mb-4">
-        {heading}
-      </h2>
-      {lead && <p className="text-slate-600 text-base leading-relaxed">{lead}</p>}
-    </div>
-  )
-}
-
-function SpacebarHero() {
-  return (
-    <section className="px-4 lg:px-10 pt-6">
-      <div className="max-w-7xl mx-auto relative overflow-hidden rounded-3xl bg-gradient-to-br from-inglu-blue via-blue-600 to-blue-500">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_70%_35%,rgba(255,255,255,0.18),transparent)]" />
-        <div className="absolute -top-16 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl" />
-
-        <div className="relative z-10 px-6 sm:px-10 lg:px-16 py-16 lg:py-20 text-center">
-          <span className="inline-block bg-white/15 border border-white/25 text-xs font-semibold tracking-wide text-white px-3 py-1.5 rounded-full mb-6">
-            SPACEBAR
-          </span>
-
-          <h1 className="text-white font-black leading-tight text-3xl sm:text-4xl lg:text-5xl max-w-3xl mx-auto">
-            The best ideas need space.
-          </h1>
-
-          <p className="mt-5 text-blue-50/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Spacebar is the room between ideas and action, where late-night thoughts
-            become projects, startups, bands, festivals and friendships.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {/* fixed: Added missing opening <a> tag */}
-            <a
-              href="#content"
-              className="h-12 bg-white text-inglu-blue text-sm font-semibold px-6 rounded-[18px] flex items-center gap-2 shadow-lg hover:-translate-y-0.5 transition-all duration-200"
-            >
-              Step inside <ArrowRight size={16} />
-            </a>
-            
-            {/* fixed: Used Link for route navigation with proper opening tag */}
-            <Link href="/ecosystem"
-              className="h-12 border border-white/60 text-white text-sm font-semibold px-6 rounded-[18px] flex items-center gap-2 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200"
-            >
-              Find your corner <ArrowRight size={16} />
-            </Link>
+    <div className="page-spacebar">
+      <header className="hero">
+        <div className="container hero-grid">
+          <div>
+            <p className="kicker">SPACEBAR</p>
+            <h1>The best ideas need space.</h1>
+            <p>
+              Spacebar is the room between ideas and action, where
+              late-night thoughts become projects, startups, bands,
+              festivals and friendships.
+            </p>
+            <div className="hero-ctas">
+              <a className="btn blue" href="#content">
+                Step inside
+              </a>
+              <a className="btn" href="/ecosystem">
+                Find your corner
+              </a>
+            </div>
           </div>
-
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto pt-10 border-t border-white/15">
-            {SPACEBAR_STATS.map((stat) => (
-              <Stat key={stat.label} {...stat} />
-            ))}
+          <div className="hero-card" aria-hidden="true">
+            <div className="metric-strip">
+              <div className="stat">
+                <strong>Ideas</strong>
+                <span>Sticky notes</span>
+              </div>
+              <div className="stat">
+                <strong>People</strong>
+                <span>Introductions</span>
+              </div>
+              <div className="stat">
+                <strong>Projects</strong>
+                <span>First drafts</span>
+              </div>
+              <div className="stat">
+                <strong>Outcomes</strong>
+                <span>Startups</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
+      </header>
 
-function AtAGlanceSection() {
-  return (
-    <section className="px-4 lg:px-10 py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto">
-        <SectionHead
-          kicker="At a glance"
-          heading="The best ideas need space."
-          lead="Spacebar is the room between ideas and action, where late-night thoughts become projects, startups, bands, festivals and friendships."
-        />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          {SPACEBAR_STATS.map((stat) => (
-            <Stat key={stat.label} {...stat} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+      <main id="content">
+        <section className="section">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">At a glance</p>
+                <h2>The best ideas need space.</h2>
+              </div>
+              <p className="lead">
+                Spacebar is the room between ideas and action, where
+                late-night thoughts become projects, startups, bands,
+                festivals and friendships.
+              </p>
+            </div>
+            <div className="grid four">
+              <div className="stat">
+                <strong>Ideas</strong>
+                <span>Sticky notes</span>
+              </div>
+              <div className="stat">
+                <strong>People</strong>
+                <span>Introductions</span>
+              </div>
+              <div className="stat">
+                <strong>Projects</strong>
+                <span>First drafts</span>
+              </div>
+              <div className="stat">
+                <strong>Outcomes</strong>
+                <span>Startups</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-function LivingRoomSection() {
-  return (
-    <section className="px-4 lg:px-10 py-16 lg:py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto">
-        <SectionHead
-          kicker="The living room"
-          heading="Stay a while. Watch the room wake up."
-          lead="The living room connects Ideas, People and Projects into one clear path for youth, campuses, creators and partners."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {SPACEBAR_LIVING_ROOM_CARDS.map((card) => (
-            <Card key={card.title} {...card} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+        <section className="section soft">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">The living room</p>
+                <h2>Stay a while. Watch the room wake up.</h2>
+              </div>
+              <p className="lead">
+                The living room connects Ideas, People and Projects into
+                one clear path for youth, campuses, creators and
+                partners.
+              </p>
+            </div>
+            <div className="grid">
+              <article className="card">
+                <h3>Ideas</h3>
+                <p>Sticky notes. Half-thoughts. The maybe.</p>
+              </article>
+              <article className="card">
+                <h3>People</h3>
+                <p>Introductions. Shared obsessions.</p>
+              </article>
+              <article className="card">
+                <h3>Projects</h3>
+                <p>Sketches. Prototypes. First drafts.</p>
+              </article>
+              <article className="card">
+                <h3>Outcomes</h3>
+                <p>Startups. Bands. Festivals. Friends.</p>
+              </article>
+            </div>
+          </div>
+        </section>
 
-function MomentsSection() {
-  return (
-    <section className="px-4 lg:px-10 py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto">
-        <SectionHead
-          kicker="Moments, not metrics"
-          heading="You cannot put a number on the night it all clicked."
-          lead="Moments, not metrics connects 11:42 PM, 4:10 PM and 9:05 AM into one clear path for youth, campuses, creators and partners."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {SPACEBAR_MOMENTS_CARDS.map((card) => (
-            <Card key={card.title} {...card} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export default function Spacebar() {
-  return (
-    <div className="bg-white">
-      <SpacebarHero />
-      <div id="content">
-        <AtAGlanceSection />
-        <LivingRoomSection />
-        <MomentsSection />
-      </div>
+        <section className="section">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">Moments, not metrics</p>
+                <h2>
+                  You cannot put a number on the night it all clicked.
+                </h2>
+              </div>
+              <p className="lead">
+                Moments, not metrics connects 11:42 PM, 4:10 PM and 9:05
+                AM into one clear path for youth, campuses, creators and
+                partners.
+              </p>
+            </div>
+            <div className="grid">
+              <article className="card">
+                <h3>11:42 PM</h3>
+                <p>Three strangers, one whiteboard, zero plan.</p>
+              </article>
+              <article className="card">
+                <h3>4:10 PM</h3>
+                <p>Someone needed a guitarist.</p>
+              </article>
+              <article className="card">
+                <h3>9:05 AM</h3>
+                <p>A second-year asked a question. A final-year stayed.</p>
+              </article>
+              <article className="card">
+                <h3>2:23 AM</h3>
+                <p>The experiment failed beautifully.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  )
+  );
 }

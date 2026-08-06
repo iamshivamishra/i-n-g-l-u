@@ -62,24 +62,28 @@ export default function Hero() {
       >
         {/* ---- background layer (Part 2 Exact Background Style) ---- */}
         <div
-          className="absolute inset-0 rounded-3xl overflow-hidden border border-white/40"
-          style={{
-            background:
-              'radial-gradient(ellipse 78% 55% at 50% -8%, rgba(255,255,255,0.16) 0%, transparent 55%), ' +
-              'radial-gradient(ellipse 55% 60% at 86% 112%, rgba(3,10,60,0.65) 0%, transparent 60%), ' +
-              'linear-gradient(165deg, #1b3aa8 0%, #0f2570 52%, #081450 100%)',
-            boxShadow: '0 60px 120px -38px rgba(26,55,160,0.55), 0 20px 44px -22px rgba(26,55,160,0.4)',
-          }}
-        >
+  className="absolute inset-0 rounded-3xl overflow-hidden border border-white/40"
+  style={{
+    background:
+      'radial-gradient(ellipse 78% 55% at 50% -8%, rgba(255,255,255,0.12) 0%, transparent 55%), ' +
+      'linear-gradient(165deg, #1d4ed8 0%, #1e40d0 45%, #1633a8 100%)',
+    boxShadow: '0 60px 120px -38px rgba(26,55,160,0.55), 0 20px 44px -22px rgba(26,55,160,0.4)',
+  }}
+>
           {/* subtle highlight ring & radial effects */}
           <div className="absolute inset-0 pointer-events-none shadow-[inset_0_1.5px_0_rgba(255,255,255,0.5),inset_0_0_0_1px_rgba(255,255,255,0.08)]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_48%_at_50%_6%,rgba(255,255,255,0.22)_0%,transparent_60%)]" />
 
           {/* scattered dots / sparkle texture */}
-          <div
-            className="absolute inset-0 opacity-70 pointer-events-none"
-            style={{ backgroundImage: DOTS_BG, backgroundRepeat: 'repeat' }}
-          />
+         {/* scattered dots / sparkle texture */}
+<div
+  className="absolute inset-0 opacity-80 pointer-events-none"
+  style={{
+    backgroundImage: DOTS_BG,
+    backgroundRepeat: 'repeat',
+    backgroundSize: '210px 210px', 
+  }}
+/>
 
           {/* glow directly behind the phone */}
           <div className="absolute right-[4%] lg:right-[4%] top-1/2 -translate-y-1/2 w-[440px] h-[440px] bg-blue-300/35 rounded-full blur-[110px]" />

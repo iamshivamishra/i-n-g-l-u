@@ -6,6 +6,7 @@ interface AnimatedCounterProps {
   /** e.g. "1000+", "500+", "1L+", "5+" */
   value: string
   duration?: number // ms
+  className?: string
 }
 
 // Splits "1000+" -> { number: 1000, suffix: "+" }, "1L+" -> { number: 1, suffix: "L+" }
@@ -15,11 +16,15 @@ function parseValue(value: string) {
   return { number: parseFloat(match[1]), suffix: match[2] }
 }
 
-export function AnimatedCounter({ value, duration = 1800 }: AnimatedCounterProps) {
+export function AnimatedCounter({
+  value,
+  duration = 1800,
+  className = 'text-xl font-extrabold text-inglu-ink',
+}: AnimatedCounterProps) {
   const { number, suffix } = parseValue(value)
   const isDecimal = !Number.isInteger(number)
   const [count, setCount] = useState(0)
-  const spanRef = useRef<HTMLParagraphElement>(null)
+  const spanRef = useRef<HTMLSpanElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
@@ -59,9 +64,9 @@ export function AnimatedCounter({ value, duration = 1800 }: AnimatedCounterProps
   const display = isDecimal ? count.toFixed(1) : Math.floor(count)
 
   return (
-    <p ref={spanRef} className="text-xl font-extrabold text-inglu-ink">
+    <span ref={spanRef} className={className}>
       {display}
       {suffix}
-    </p>
+    </span>
   )
 }

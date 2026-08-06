@@ -69,14 +69,48 @@ export const subBrands = [
 
 export const ecosystemTabs = ['For Students', 'For Brands', 'For Creators', 'For Artists', 'For Colleges']
 
-export const ecosystemItems = [
-  { title: 'Internships', desc: 'Real opportunities with real impact.' },
-  { title: 'Events', desc: "Experience India's best youth events." },
-  { title: 'Network', desc: 'Connect with people who shape the future.' },
-  { title: 'Courses', desc: 'Learn from experts. Build your edge.' },
-  { title: 'Community', desc: 'Be part of a movement that lasts forever.' },
-  { title: 'Growth', desc: 'From college life to dream life.' },
-]
+export const ecosystemItemsByTab: Record<string, { title: string; desc: string }[]> = {
+  'For Students': [
+    { title: 'Internships', desc: 'Real opportunities with real impact.' },
+    { title: 'Events', desc: "Experience India's best youth events." },
+    { title: 'Network', desc: 'Connect with people who shape the future.' },
+    { title: 'Courses', desc: 'Learn from experts. Build your edge.' },
+    { title: 'Community', desc: 'Be part of a movement that lasts forever.' },
+    { title: 'Growth', desc: 'From college life to dream life.' },
+  ],
+  'For Brands': [
+    { title: 'Campus Reach', desc: 'Access verified Gen Z audiences.' },
+    { title: 'Activations', desc: 'On-ground campus experiences.' },
+    { title: 'Creator Campaigns', desc: 'Authentic content at scale.' },
+    { title: 'Ambassadors', desc: 'Always-on local presence.' },
+    { title: 'Insights', desc: 'Real engagement data.' },
+    { title: 'ROI', desc: 'Measurable outcomes, not impressions.' },
+  ],
+  'For Creators': [
+    { title: 'Brand Deals', desc: 'Paid gigs matched to you.' },
+    { title: 'Growth Tools', desc: 'Grow your audience with support.' },
+    { title: 'Collaborations', desc: 'Work with other creators.' },
+    { title: 'Events', desc: 'Cover and host live moments.' },
+    { title: 'Payouts', desc: 'Get paid, no gatekeeping.' },
+    { title: 'Community', desc: 'A network of creators like you.' },
+  ],
+  'For Artists': [
+    { title: 'Live Stages', desc: 'Perform at campus events.' },
+    { title: 'Muse Records', desc: 'Get discovered and signed.' },
+    { title: 'Showcases', desc: 'Rooms built for discovery.' },
+    { title: 'Bookings', desc: 'Get booked for real gigs.' },
+    { title: 'Studio Time', desc: 'Recording and production support.' },
+    { title: 'Fanbase', desc: 'Build a following that lasts.' },
+  ],
+  'For Colleges': [
+    { title: 'Campus Programs', desc: 'Zero-cost engagement engine.' },
+    { title: 'Events', desc: 'Brand-funded activations.' },
+    { title: 'Reputation', desc: 'Become the campus students remember.' },
+    { title: 'Societies', desc: 'Empower clubs and communities.' },
+    { title: 'Opportunities', desc: 'Bring internships to your students.' },
+    { title: 'Partnerships', desc: 'Direct brand collaborations.' },
+  ],
+}
 
 
 // data.js

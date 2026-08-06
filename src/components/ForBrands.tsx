@@ -1,140 +1,162 @@
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { BRANDS_STATS, BRANDS_PROBLEM_CARDS, BRANDS_WAYS_CARDS } from '@/data/data'
+// app/brands/page.tsx
+export const metadata = {
+  title: "For Brands — INGLU Website UI",
+  description:
+    "INGLU connects brands directly with students, creators, campuses and communities through real-world experiences, creator ecosystems and measurable engagement.",
+};
 
-function Stat({ value, label }: { value: string; label: string }) {
+export default function BrandsPage() {
   return (
-    <div className="text-center">
-      <strong className="block text-2xl sm:text-3xl font-extrabold text-white">{value}</strong>
-      <span className="text-xs sm:text-sm text-blue-50/80 font-medium">{label}</span>
-    </div>
-  )
-}
-
-function Card({ title, body }: { title: string; body: string }) {
-  return (
-    <article className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6">
-      <h3 className="text-lg font-bold text-inglu-ink mb-2">{title}</h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{body}</p>
-    </article>
-  )
-}
-
-function SectionHead({
-  kicker,
-  heading,
-  lead,
-}: {
-  kicker: string
-  heading: string
-  lead?: string
-}) {
-  return (
-    <div className="max-w-3xl mx-auto text-center mb-12">
-      <p className="inline-block text-xs font-semibold tracking-wide text-inglu-blue bg-inglu-blue/10 px-3 py-1.5 rounded-full mb-4">
-        {kicker}
-      </p>
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-inglu-ink leading-tight mb-4">
-        {heading}
-      </h2>
-      {lead && <p className="text-slate-600 text-base leading-relaxed">{lead}</p>}
-    </div>
-  )
-}
-
-function BrandsHero() {
-  return (
-    <section className="px-4 lg:px-10 pt-6">
-      <div className="max-w-7xl mx-auto relative overflow-hidden rounded-3xl bg-gradient-to-br from-inglu-blue via-blue-600 to-blue-500">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_70%_35%,rgba(255,255,255,0.18),transparent)]" />
-        <div className="absolute -top-16 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl" />
-
-        <div className="relative z-10 px-6 sm:px-10 lg:px-16 py-16 lg:py-20 text-center">
-          <span className="inline-block bg-white/15 border border-white/25 text-xs font-semibold tracking-wide text-white px-3 py-1.5 rounded-full mb-6">
-            FOR BRANDS
-          </span>
-
-          <h1 className="text-white font-black leading-tight text-3xl sm:text-4xl lg:text-5xl max-w-3xl mx-auto">
-            Reach Gen Z where culture actually happens.
-          </h1>
-
-          <p className="mt-5 text-blue-50/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            INGLU connects brands directly with students, creators, campuses and communities
-            through real-world experiences, creator ecosystems and measurable engagement.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {/* यहाँ एरर थी, जिसे <a जोड़कर ठीक कर दिया गया है */}
-            <a
-              href="#content"
-              className="h-12 bg-white text-inglu-blue text-sm font-semibold px-6 rounded-[18px] flex items-center gap-2 shadow-lg hover:-translate-y-0.5 transition-all duration-200"
-            >
-              Talk to partnerships <ArrowRight size={16} />
-            </a>
-            <Link href="/ecosystem"
-              className="h-12 border border-white/60 text-white text-sm font-semibold px-6 rounded-[18px] flex items-center gap-2 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200"
-            >
-              Explore case studies <ArrowRight size={16} />
-            </Link>
+    <div className="page-brands">
+      <header className="hero">
+        <div className="container hero-grid">
+          <div>
+            <p className="kicker">For Brands</p>
+            <h1>Reach Gen Z where culture actually happens.</h1>
+            <p>
+              INGLU connects brands directly with students, creators,
+              campuses and communities through real-world experiences,
+              creator ecosystems and measurable engagement.
+            </p>
+            <div className="hero-ctas">
+              <a className="btn blue" href="#content">
+                Talk to partnerships
+              </a>
+              <a className="btn" href="/ecosystem">
+                Explore case studies
+              </a>
+            </div>
           </div>
-
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto pt-10 border-t border-white/15">
-            {BRANDS_STATS.map((stat) => (
-              <Stat key={stat.label} {...stat} />
-            ))}
+          <div className="hero-card" aria-hidden="true">
+            <div className="metric-strip">
+              <div className="stat">
+                <strong>500+</strong>
+                <span>Campuses</span>
+              </div>
+              <div className="stat">
+                <strong>50+</strong>
+                <span>Brand partners</span>
+              </div>
+              <div className="stat">
+                <strong>7 days</strong>
+                <span>Activation window</span>
+              </div>
+              <div className="stat">
+                <strong>1L+</strong>
+                <span>Youth reach</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
+      </header>
 
-function ProblemSection() {
-  return (
-    <section className="px-4 lg:px-10 py-16 lg:py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto">
-        <SectionHead
-          kicker="Traditional youth marketing is breaking."
-          heading="Attention is fragmented, reach does not equal engagement, and communities cannot be bought."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {BRANDS_PROBLEM_CARDS.map((card) => (
-            <Card key={card.title} {...card} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+      <main id="content">
+        <section className="section">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">At a glance</p>
+                <h2>Reach Gen Z where culture actually happens.</h2>
+              </div>
+              <p className="lead">
+                INGLU connects brands directly with students, creators,
+                campuses and communities through real-world experiences,
+                creator ecosystems and measurable engagement.
+              </p>
+            </div>
+            <div className="grid four">
+              <div className="stat">
+                <strong>500+</strong>
+                <span>Campuses</span>
+              </div>
+              <div className="stat">
+                <strong>50+</strong>
+                <span>Brand partners</span>
+              </div>
+              <div className="stat">
+                <strong>7 days</strong>
+                <span>Activation window</span>
+              </div>
+              <div className="stat">
+                <strong>1L+</strong>
+                <span>Youth reach</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-function WaysToWinSection() {
-  return (
-    <section className="px-4 lg:px-10 py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto">
-        <SectionHead
-          kicker="Ways to win Gen Z"
-          heading="One ecosystem. Multiple entry points."
-          lead="One clear path for youth, campuses, creators and brand partners."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {BRANDS_WAYS_CARDS.map((card) => (
-            <Card key={card.title} {...card} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+        <section className="section soft">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">Traditional youth marketing is breaking.</p>
+                <h2>
+                  Attention is fragmented, reach does not equal engagement,
+                  and communities cannot be bought.
+                </h2>
+              </div>
+              <p className="lead">
+                Traditional youth marketing is breaking. connects Attention
+                is fragmented, Reach is not engagement and Communities
+                cannot be bought into one clear path for youth, campuses,
+                creators and partners.
+              </p>
+            </div>
+            <div className="grid three">
+              <article className="card">
+                <h3>Attention is fragmented</h3>
+                <p>Gen Z lives across apps, feeds, campuses and communities.</p>
+              </article>
+              <article className="card">
+                <h3>Reach is not engagement</h3>
+                <p>Impressions are cheap. Trust is not.</p>
+              </article>
+              <article className="card">
+                <h3>Communities cannot be bought</h3>
+                <p>You have to be part of them, not interrupt them.</p>
+              </article>
+            </div>
+          </div>
+        </section>
 
-export default function ForBrands() {
-  return (
-    <div className="bg-white">
-      <BrandsHero />
-      <div id="content">
-        <ProblemSection />
-        <WaysToWinSection />
-      </div>
+        <section className="section">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">Ways to win Gen Z</p>
+                <h2>One ecosystem. Multiple entry points.</h2>
+              </div>
+              <p className="lead">
+                Ways to win Gen Z connects Campus activations, Creator
+                campaigns and Product launches into one clear path for
+                youth, campuses, creators and partners.
+              </p>
+            </div>
+            <div className="grid">
+              <article className="card">
+                <h3>Campus activations</h3>
+                <p>On-ground experiences across colleges.</p>
+              </article>
+              <article className="card">
+                <h3>Creator campaigns</h3>
+                <p>Student creators make authentic content.</p>
+              </article>
+              <article className="card">
+                <h3>Product launches</h3>
+                <p>Introduce products where Gen Z already is.</p>
+              </article>
+              <article className="card">
+                <h3>Ambassador programs</h3>
+                <p>Always-on local campus presence.</p>
+              </article>
+              <article className="card">
+                <h3>Community building</h3>
+                <p>Grow and energise youth communities.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  )
+  );
 }

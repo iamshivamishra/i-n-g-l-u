@@ -1,142 +1,162 @@
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { GRID_STATS, GRID_WHY_CARDS, GRID_FLOW_CARDS } from '@/data/data'
+// app/grid/page.tsx
+export const metadata = {
+  title: "THE GRID — INGLU Website UI",
+  description:
+    "The Grid is INGLU's opportunity infrastructure connecting students, creators, campus leaders and brands so internships, collaborations and real networking move to the people building things.",
+};
 
-function Stat({ value, label }: { value: string; label: string }) {
+export default function GridPage() {
   return (
-    <div className="text-center">
-      <strong className="block text-lg sm:text-xl font-extrabold text-white leading-tight">{value}</strong>
-      <span className="text-xs sm:text-sm text-blue-50/80 font-medium">{label}</span>
-    </div>
-  )
-}
-
-function Card({ title, body }: { title: string; body: string }) {
-  return (
-    <article className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6">
-      <h3 className="text-lg font-bold text-inglu-ink mb-2">{title}</h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{body}</p>
-    </article>
-  )
-}
-
-function SectionHead({
-  kicker,
-  heading,
-  lead,
-}: {
-  kicker: string
-  heading: string
-  lead?: string
-}) {
-  return (
-    <div className="max-w-3xl mx-auto text-center mb-12">
-      <p className="inline-block text-xs font-semibold tracking-wide text-inglu-blue bg-inglu-blue/10 px-3 py-1.5 rounded-full mb-4">
-        {kicker}
-      </p>
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-inglu-ink leading-tight mb-4">
-        {heading}
-      </h2>
-      {lead && <p className="text-slate-600 text-base leading-relaxed">{lead}</p>}
-    </div>
-  )
-}
-
-function GridHero() {
-  return (
-    <section className="px-4 lg:px-10 pt-6">
-      <div className="max-w-7xl mx-auto relative overflow-hidden rounded-3xl bg-gradient-to-br from-inglu-blue via-blue-600 to-blue-500">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_70%_35%,rgba(255,255,255,0.18),transparent)]" />
-        <div className="absolute -top-16 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl" />
-
-        <div className="relative z-10 px-6 sm:px-10 lg:px-16 py-16 lg:py-20 text-center">
-          <span className="inline-block bg-white/15 border border-white/25 text-xs font-semibold tracking-wide text-white px-3 py-1.5 rounded-full mb-6">
-            THE GRID · INGLU
-          </span>
-
-          <h1 className="text-white font-black leading-tight text-3xl sm:text-4xl lg:text-5xl max-w-3xl mx-auto">
-            Your next opportunity is already in the network.
-          </h1>
-
-          <p className="mt-5 text-blue-50/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            The Grid is INGLU's opportunity infrastructure connecting students, creators,
-            campus leaders and brands so internships, collaborations and real networking
-            move to the people building things.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {/* fixed: Added missing opening '<a' tag below */}
-            <a
-              href="#content"
-              className="h-12 bg-white text-inglu-blue text-sm font-semibold px-6 rounded-[18px] flex items-center gap-2 shadow-lg hover:-translate-y-0.5 transition-all duration-200"
-            >
-              Apply to The Grid <ArrowRight size={16} />
-            </a>
-            
-            <Link href="/ecosystem"
-              className="h-12 border border-white/60 text-white text-sm font-semibold px-6 rounded-[18px] flex items-center gap-2 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200"
-            >
-              See the network <ArrowRight size={16} />
-            </Link>
+    <div className="page-grid">
+      <header className="hero">
+        <div className="container hero-grid">
+          <div>
+            <p className="kicker">The Grid · INGLU</p>
+            <h1>Your next opportunity is already in the network.</h1>
+            <p>
+              The Grid is INGLU&apos;s opportunity infrastructure
+              connecting students, creators, campus leaders and brands so
+              internships, collaborations and real networking move to the
+              people building things.
+            </p>
+            <div className="hero-ctas">
+              <a className="btn blue" href="#content">
+                Apply to The Grid
+              </a>
+              <a className="btn" href="/ecosystem">
+                See the network
+              </a>
+            </div>
           </div>
-
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto pt-10 border-t border-white/15">
-            {GRID_STATS.map((stat) => (
-              <Stat key={stat.label} {...stat} />
-            ))}
+          <div className="hero-card" aria-hidden="true">
+            <div className="metric-strip">
+              <div className="stat">
+                <strong>200+</strong>
+                <span>Active nodes</span>
+              </div>
+              <div className="stat">
+                <strong>500+</strong>
+                <span>Campuses</span>
+              </div>
+              <div className="stat">
+                <strong>Tiers</strong>
+                <span>Progression</span>
+              </div>
+              <div className="stat">
+                <strong>Paid</strong>
+                <span>Opportunities</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
+      </header>
 
-function WhyGridSection() {
-  return (
-    <section className="px-4 lg:px-10 py-16 lg:py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto">
-        <SectionHead
-          kicker="Why The Grid exists"
-          heading="Talent is everywhere. Access is not."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {GRID_WHY_CARDS.map((card) => (
-            <Card key={card.title} {...card} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+      <main id="content">
+        <section className="section">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">At a glance</p>
+                <h2>Your next opportunity is already in the network.</h2>
+              </div>
+              <p className="lead">
+                The Grid is INGLU&apos;s opportunity infrastructure
+                connecting students, creators, campus leaders and brands
+                so internships, collaborations and real networking move
+                to the people building things.
+              </p>
+            </div>
+            <div className="grid four">
+              <div className="stat">
+                <strong>200+</strong>
+                <span>Active nodes</span>
+              </div>
+              <div className="stat">
+                <strong>500+</strong>
+                <span>Campuses</span>
+              </div>
+              <div className="stat">
+                <strong>Tiers</strong>
+                <span>Progression</span>
+              </div>
+              <div className="stat">
+                <strong>Paid</strong>
+                <span>Opportunities</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-function WhatFlowsSection() {
-  return (
-    <section className="px-4 lg:px-10 py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto">
-        <SectionHead
-          kicker="What flows through"
-          heading="Opportunity in every form."
-          lead="One clear path for youth, campuses, creators and partners."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {GRID_FLOW_CARDS.map((card) => (
-            <Card key={card.title} {...card} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+        <section className="section soft">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">Why The Grid exists</p>
+                <h2>Talent is everywhere. Access is not.</h2>
+              </div>
+              <p className="lead">
+                Why The Grid exists connects Opportunities fragmented,
+                Communities isolated and Access uneven into one clear path
+                for youth, campuses, creators and partners.
+              </p>
+            </div>
+            <div className="grid three">
+              <article className="card">
+                <h3>Opportunities fragmented</h3>
+                <p>
+                  Internships, gigs and collabs scattered across DMs and
+                  luck.
+                </p>
+              </article>
+              <article className="card">
+                <h3>Communities isolated</h3>
+                <p>
+                  Every campus works alone and networks reset at
+                  graduation.
+                </p>
+              </article>
+              <article className="card">
+                <h3>Access uneven</h3>
+                <p>Who you know decides what you get.</p>
+              </article>
+            </div>
+          </div>
+        </section>
 
-export default function Grid() {
-  return (
-    <div className="bg-white">
-      <GridHero />
-      <div id="content">
-        <WhyGridSection />
-        <WhatFlowsSection />
-      </div>
+        <section className="section">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <p className="kicker">What flows through</p>
+                <h2>Opportunity in every form.</h2>
+              </div>
+              <p className="lead">
+                What flows through connects Internships, Campus ambassador
+                roles and Collaborations into one clear path for youth,
+                campuses, creators and partners.
+              </p>
+            </div>
+            <div className="grid">
+              <article className="card">
+                <h3>Internships</h3>
+                <p>Real, paid internships from INGLU brand partners.</p>
+              </article>
+              <article className="card">
+                <h3>Campus ambassador roles</h3>
+                <p>Represent brands and build local presence.</p>
+              </article>
+              <article className="card">
+                <h3>Collaborations</h3>
+                <p>Creators, founders, leaders and projects.</p>
+              </article>
+              <article className="card">
+                <h3>Growth</h3>
+                <p>Credentials, network and proof of momentum.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  )
+  );
 }

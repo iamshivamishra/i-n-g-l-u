@@ -49,7 +49,6 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
-                {link.name === 'Ecosystem' && <ChevronDown size={14} />}
               </Link>
             </li>
           ))}
