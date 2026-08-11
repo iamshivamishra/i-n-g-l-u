@@ -44,6 +44,28 @@ export default function Footer() {
                 </div>
               ))}
             </div>
+
+            {/* STAY IN THE LOOP - now below social icons */}
+            <div className="mt-8">
+              <p className="text-xs font-bold tracking-wider text-slate-400 mb-1">STAY IN THE LOOP</p>
+              <p className="text-xs text-slate-400 mb-3">Weekly drops. No spam.</p>
+              <div className="flex items-center gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-40 text-xs px-3 py-2.5 rounded-lg border border-slate-200 outline-none focus:border-inglu-blue placeholder:text-slate-400"
+                />
+                <button
+                  onClick={handleSubscribe}
+                  disabled={subscribing}
+                  className="bg-inglu-blue text-white p-2.5 rounded-lg hover:bg-inglu-blue-dark transition-colors flex-shrink-0 disabled:opacity-60"
+                >
+                  <Send size={14} />
+                </button>
+              </div>
+            </div>
           </div>
 
           {Object.entries(footerLinks).map(([heading, links]) => (
@@ -63,27 +85,6 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-
-          <div>
-            <p className="text-xs font-bold tracking-wider text-slate-400 mb-4">STAY IN THE LOOP</p>
-            <p className="text-xs text-slate-400 mb-3">Weekly drops. No spam.</p>
-            <div className="flex items-center gap-2">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 text-xs px-3 py-2.5 rounded-lg border border-slate-200 outline-none focus:border-inglu-blue placeholder:text-slate-400"
-              />
-              <button
-                onClick={handleSubscribe}
-                disabled={subscribing}
-                className="bg-inglu-blue text-white p-2.5 rounded-lg hover:bg-inglu-blue-dark transition-colors flex-shrink-0 disabled:opacity-60"
-              >
-                <Send size={14} />
-              </button>
-            </div>
-          </div>
         </div>
 
         <div className="border-t border-slate-200 mt-10 pt-6 text-center text-[11px] text-slate-400">
