@@ -76,14 +76,14 @@ export default function Hero() {
 
           {/* scattered dots / sparkle texture */}
          {/* scattered dots / sparkle texture */}
-<div
+{/* <div
   className="absolute inset-0 opacity-80 pointer-events-none"
   style={{
     backgroundImage: DOTS_BG,
     backgroundRepeat: 'repeat',
     backgroundSize: '210px 210px', 
   }}
-/>
+/> */}
 
           {/* glow directly behind the phone */}
           <div className="absolute right-[4%] lg:right-[4%] top-1/2 -translate-y-1/2 w-[440px] h-[440px] bg-blue-300/35 rounded-full blur-[110px]" />
